@@ -1,0 +1,2348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MuhasebeModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="vzb_accounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="currency_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="opening_balance" Type="double" Nullable="false" />
+          <Property Name="bank_name" Type="varchar" MaxLength="191" />
+          <Property Name="bank_phone" Type="varchar" MaxLength="191" />
+          <Property Name="bank_address" Type="text" />
+          <Property Name="enabled" Type="bool" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_bill_histories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="bill_id" Type="int" Nullable="false" />
+          <Property Name="status_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="notify" Type="bool" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_bill_item_taxes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="bill_id" Type="int" Nullable="false" />
+          <Property Name="bill_item_id" Type="int" Nullable="false" />
+          <Property Name="tax_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="amount" Type="double" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_bill_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="bill_id" Type="int" Nullable="false" />
+          <Property Name="item_id" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="sku" Type="varchar" MaxLength="191" />
+          <Property Name="quantity" Type="double" Nullable="false" />
+          <Property Name="price" Type="double" Nullable="false" />
+          <Property Name="total" Type="double" Nullable="false" />
+          <Property Name="tax" Type="double" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_bill_payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="bill_id" Type="int" Nullable="false" />
+          <Property Name="account_id" Type="int" Nullable="false" />
+          <Property Name="paid_at" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="amount" Type="double" Nullable="false" />
+          <Property Name="currency_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="currency_rate" Type="double" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="payment_method" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="reference" Type="varchar" MaxLength="191" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+          <Property Name="reconciled" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_bill_statuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_bill_totals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="bill_id" Type="int" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="191" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="amount" Type="double" Nullable="false" />
+          <Property Name="sort_order" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_bills">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="bill_number" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="order_number" Type="varchar" MaxLength="191" />
+          <Property Name="bill_status_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="billed_at" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="due_at" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="amount" Type="double" Nullable="false" />
+          <Property Name="currency_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="currency_rate" Type="double" Nullable="false" />
+          <Property Name="vendor_id" Type="int" Nullable="false" />
+          <Property Name="vendor_name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="vendor_email" Type="varchar" MaxLength="191" />
+          <Property Name="vendor_tax_number" Type="varchar" MaxLength="191" />
+          <Property Name="vendor_phone" Type="varchar" MaxLength="191" />
+          <Property Name="vendor_address" Type="text" />
+          <Property Name="notes" Type="text" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="parent_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="color" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="enabled" Type="bool" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_companies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="domain" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="enabled" Type="bool" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_currencies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="rate" Type="double" Nullable="false" />
+          <Property Name="enabled" Type="bool" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+          <Property Name="precision" Type="varchar" MaxLength="191" />
+          <Property Name="symbol" Type="varchar" MaxLength="191" />
+          <Property Name="symbol_first" Type="int" Nullable="false" />
+          <Property Name="decimal_mark" Type="varchar" MaxLength="191" />
+          <Property Name="thousands_separator" Type="varchar" MaxLength="191" />
+        </EntityType>
+        <EntityType Name="vzb_customers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="191" />
+          <Property Name="tax_number" Type="varchar" MaxLength="191" />
+          <Property Name="phone" Type="varchar" MaxLength="191" />
+          <Property Name="address" Type="text" />
+          <Property Name="website" Type="varchar" MaxLength="191" />
+          <Property Name="currency_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="enabled" Type="bool" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+          <Property Name="reference" Type="varchar" MaxLength="191" />
+        </EntityType>
+        <EntityType Name="vzb_failed_jobs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="ubigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="connection" Type="text" Nullable="false" />
+          <Property Name="queue" Type="text" Nullable="false" />
+          <Property Name="payload" Type="longtext" Nullable="false" />
+          <Property Name="exception" Type="longtext" Nullable="false" />
+          <Property Name="failed_at" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_invoice_histories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="invoice_id" Type="int" Nullable="false" />
+          <Property Name="status_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="notify" Type="bool" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_invoice_item_taxes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="invoice_id" Type="int" Nullable="false" />
+          <Property Name="invoice_item_id" Type="int" Nullable="false" />
+          <Property Name="tax_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="amount" Type="double" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_invoice_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="invoice_id" Type="int" Nullable="false" />
+          <Property Name="item_id" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="sku" Type="varchar" MaxLength="191" />
+          <Property Name="quantity" Type="double" Nullable="false" />
+          <Property Name="price" Type="double" Nullable="false" />
+          <Property Name="total" Type="double" Nullable="false" />
+          <Property Name="tax" Type="double" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_invoice_payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="invoice_id" Type="int" Nullable="false" />
+          <Property Name="account_id" Type="int" Nullable="false" />
+          <Property Name="paid_at" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="amount" Type="double" Nullable="false" />
+          <Property Name="currency_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="currency_rate" Type="double" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="payment_method" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="reference" Type="varchar" MaxLength="191" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+          <Property Name="reconciled" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_invoice_statuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_invoice_totals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="invoice_id" Type="int" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="191" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="amount" Type="double" Nullable="false" />
+          <Property Name="sort_order" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_invoices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="invoice_number" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="order_number" Type="varchar" MaxLength="191" />
+          <Property Name="invoice_status_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="invoiced_at" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="due_at" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="amount" Type="double" Nullable="false" />
+          <Property Name="currency_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="currency_rate" Type="double" Nullable="false" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="customer_name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="customer_email" Type="varchar" MaxLength="191" />
+          <Property Name="customer_tax_number" Type="varchar" MaxLength="191" />
+          <Property Name="customer_phone" Type="varchar" MaxLength="191" />
+          <Property Name="customer_address" Type="text" />
+          <Property Name="notes" Type="text" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="parent_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="sku" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="sale_price" Type="double" Nullable="false" />
+          <Property Name="purchase_price" Type="double" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="category_id" Type="int" />
+          <Property Name="tax_id" Type="int" />
+          <Property Name="enabled" Type="bool" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_jobs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="ubigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="queue" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="payload" Type="longtext" Nullable="false" />
+          <Property Name="attempts" Type="utinyint" Nullable="false" />
+          <Property Name="reserved_at" Type="uint" />
+          <Property Name="available_at" Type="uint" Nullable="false" />
+          <Property Name="created_at" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_media">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="disk" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="directory" Type="varchar" MaxLength="68" Nullable="false" />
+          <Property Name="filename" Type="varchar" MaxLength="121" Nullable="false" />
+          <Property Name="extension" Type="varchar" MaxLength="28" Nullable="false" />
+          <Property Name="mime_type" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="aggregate_type" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="size" Type="uint" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_mediables">
+          <Key>
+            <PropertyRef Name="media_id" />
+            <PropertyRef Name="mediable_type" />
+            <PropertyRef Name="mediable_id" />
+            <PropertyRef Name="tag" />
+          </Key>
+          <Property Name="media_id" Type="uint" Nullable="false" />
+          <Property Name="mediable_type" Type="varchar" MaxLength="152" Nullable="false" />
+          <Property Name="mediable_id" Type="uint" Nullable="false" />
+          <Property Name="tag" Type="varchar" MaxLength="68" Nullable="false" />
+          <Property Name="order" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_migrations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="migration" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="batch" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_module_histories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="module_id" Type="int" Nullable="false" />
+          <Property Name="category" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="version" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_modules">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="alias" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_notifications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="guid" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="notifiable_id" Type="uint" Nullable="false" />
+          <Property Name="notifiable_type" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="data" Type="text" Nullable="false" />
+          <Property Name="read_at" Type="timestamp" Precision="0" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.wwwilgim_muhasebe.vzb_password_resets' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vzb_password_resets">
+          <Key>
+            <PropertyRef Name="email" />
+            <PropertyRef Name="token" />
+          </Key>
+          <Property Name="email" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="token" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="account_id" Type="int" Nullable="false" />
+          <Property Name="paid_at" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="amount" Type="double" Nullable="false" />
+          <Property Name="currency_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="currency_rate" Type="double" Nullable="false" />
+          <Property Name="vendor_id" Type="int" />
+          <Property Name="description" Type="text" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="payment_method" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="reference" Type="varchar" MaxLength="191" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+          <Property Name="parent_id" Type="int" Nullable="false" />
+          <Property Name="reconciled" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_permissions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="display_name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="191" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_reconciliations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="account_id" Type="int" Nullable="false" />
+          <Property Name="started_at" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="ended_at" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="closing_balance" Type="double" Nullable="false" />
+          <Property Name="reconciled" Type="bool" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_recurring">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="recurable_id" Type="uint" Nullable="false" />
+          <Property Name="recurable_type" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="frequency" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="interval" Type="int" Nullable="false" />
+          <Property Name="started_at" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="count" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_revenues">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="account_id" Type="int" Nullable="false" />
+          <Property Name="paid_at" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="amount" Type="double" Nullable="false" />
+          <Property Name="currency_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="currency_rate" Type="double" Nullable="false" />
+          <Property Name="customer_id" Type="int" />
+          <Property Name="description" Type="text" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="payment_method" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="reference" Type="varchar" MaxLength="191" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+          <Property Name="parent_id" Type="int" Nullable="false" />
+          <Property Name="reconciled" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_role_permissions">
+          <Key>
+            <PropertyRef Name="role_id" />
+            <PropertyRef Name="permission_id" />
+          </Key>
+          <Property Name="role_id" Type="uint" Nullable="false" />
+          <Property Name="permission_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="display_name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="191" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.wwwilgim_muhasebe.vzb_sessions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vzb_sessions">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="payload" />
+            <PropertyRef Name="last_activity" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="user_id" Type="uint" />
+          <Property Name="ip_address" Type="varchar" MaxLength="45" />
+          <Property Name="user_agent" Type="text" />
+          <Property Name="payload" Type="text" Nullable="false" />
+          <Property Name="last_activity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_settings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="key" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="value" Type="text" />
+        </EntityType>
+        <EntityType Name="vzb_taxes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="rate" Type="double" Nullable="false" />
+          <Property Name="enabled" Type="bool" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+          <Property Name="type" Type="varchar" MaxLength="191" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_transfers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="payment_id" Type="int" Nullable="false" />
+          <Property Name="revenue_id" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="vzb_user_companies">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="company_id" />
+            <PropertyRef Name="user_type" />
+          </Key>
+          <Property Name="user_id" Type="uint" Nullable="false" />
+          <Property Name="company_id" Type="uint" Nullable="false" />
+          <Property Name="user_type" Type="varchar" MaxLength="191" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_user_permissions">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="permission_id" />
+            <PropertyRef Name="user_type" />
+          </Key>
+          <Property Name="user_id" Type="uint" Nullable="false" />
+          <Property Name="permission_id" Type="uint" Nullable="false" />
+          <Property Name="user_type" Type="varchar" MaxLength="191" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_user_roles">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="role_id" />
+            <PropertyRef Name="user_type" />
+          </Key>
+          <Property Name="user_id" Type="uint" Nullable="false" />
+          <Property Name="role_id" Type="uint" Nullable="false" />
+          <Property Name="user_type" Type="varchar" MaxLength="191" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="remember_token" Type="varchar" MaxLength="100" />
+          <Property Name="last_logged_in_at" Type="timestamp" Precision="0" />
+          <Property Name="enabled" Type="bool" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+          <Property Name="locale" Type="varchar" MaxLength="191" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_vendors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="191" />
+          <Property Name="tax_number" Type="varchar" MaxLength="191" />
+          <Property Name="phone" Type="varchar" MaxLength="191" />
+          <Property Name="address" Type="text" />
+          <Property Name="website" Type="varchar" MaxLength="191" />
+          <Property Name="currency_code" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="enabled" Type="bool" Nullable="false" />
+          <Property Name="created_at" Type="timestamp" Precision="0" />
+          <Property Name="updated_at" Type="timestamp" Precision="0" />
+          <Property Name="deleted_at" Type="timestamp" Precision="0" />
+          <Property Name="reference" Type="varchar" MaxLength="191" />
+        </EntityType>
+        <Association Name="vzb_mediables_ibfk_1">
+          <End Role="vzb_media" Type="Self.vzb_media" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vzb_mediables" Type="Self.vzb_mediables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vzb_media">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vzb_mediables">
+              <PropertyRef Name="media_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vzb_role_permissions_ibfk_1">
+          <End Role="vzb_permissions" Type="Self.vzb_permissions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vzb_role_permissions" Type="Self.vzb_role_permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vzb_permissions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vzb_role_permissions">
+              <PropertyRef Name="permission_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vzb_role_permissions_ibfk_2">
+          <End Role="vzb_roles" Type="Self.vzb_roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vzb_role_permissions" Type="Self.vzb_role_permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vzb_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vzb_role_permissions">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vzb_user_permissions_ibfk_1">
+          <End Role="vzb_permissions" Type="Self.vzb_permissions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vzb_user_permissions" Type="Self.vzb_user_permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vzb_permissions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vzb_user_permissions">
+              <PropertyRef Name="permission_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vzb_user_roles_ibfk_1">
+          <End Role="vzb_roles" Type="Self.vzb_roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vzb_user_roles" Type="Self.vzb_user_roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vzb_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vzb_user_roles">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MuhasebeModelStoreContainer">
+          <EntitySet Name="vzb_accounts" EntityType="Self.vzb_accounts" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_bill_histories" EntityType="Self.vzb_bill_histories" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_bill_item_taxes" EntityType="Self.vzb_bill_item_taxes" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_bill_items" EntityType="Self.vzb_bill_items" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_bill_payments" EntityType="Self.vzb_bill_payments" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_bill_statuses" EntityType="Self.vzb_bill_statuses" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_bill_totals" EntityType="Self.vzb_bill_totals" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_bills" EntityType="Self.vzb_bills" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_categories" EntityType="Self.vzb_categories" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_companies" EntityType="Self.vzb_companies" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_currencies" EntityType="Self.vzb_currencies" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_customers" EntityType="Self.vzb_customers" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_failed_jobs" EntityType="Self.vzb_failed_jobs" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_invoice_histories" EntityType="Self.vzb_invoice_histories" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_invoice_item_taxes" EntityType="Self.vzb_invoice_item_taxes" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_invoice_items" EntityType="Self.vzb_invoice_items" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_invoice_payments" EntityType="Self.vzb_invoice_payments" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_invoice_statuses" EntityType="Self.vzb_invoice_statuses" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_invoice_totals" EntityType="Self.vzb_invoice_totals" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_invoices" EntityType="Self.vzb_invoices" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_items" EntityType="Self.vzb_items" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_jobs" EntityType="Self.vzb_jobs" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_media" EntityType="Self.vzb_media" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_mediables" EntityType="Self.vzb_mediables" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_migrations" EntityType="Self.vzb_migrations" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_module_histories" EntityType="Self.vzb_module_histories" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_modules" EntityType="Self.vzb_modules" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_notifications" EntityType="Self.vzb_notifications" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_payments" EntityType="Self.vzb_payments" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_permissions" EntityType="Self.vzb_permissions" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_reconciliations" EntityType="Self.vzb_reconciliations" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_recurring" EntityType="Self.vzb_recurring" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_revenues" EntityType="Self.vzb_revenues" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_role_permissions" EntityType="Self.vzb_role_permissions" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_roles" EntityType="Self.vzb_roles" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_settings" EntityType="Self.vzb_settings" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_taxes" EntityType="Self.vzb_taxes" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_transfers" EntityType="Self.vzb_transfers" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_user_companies" EntityType="Self.vzb_user_companies" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_user_permissions" EntityType="Self.vzb_user_permissions" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_user_roles" EntityType="Self.vzb_user_roles" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_users" EntityType="Self.vzb_users" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_vendors" EntityType="Self.vzb_vendors" Schema="wwwilgim_muhasebe" store:Type="Tables" />
+          <EntitySet Name="vzb_password_resets" EntityType="Self.vzb_password_resets" store:Type="Tables" store:Schema="wwwilgim_muhasebe">
+            <DefiningQuery>SELECT
+`vzb_password_resets`.`email`, 
+`vzb_password_resets`.`token`, 
+`vzb_password_resets`.`created_at`
+FROM `vzb_password_resets` AS `vzb_password_resets`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vzb_sessions" EntityType="Self.vzb_sessions" store:Type="Tables" store:Schema="wwwilgim_muhasebe">
+            <DefiningQuery>SELECT
+`vzb_sessions`.`id`, 
+`vzb_sessions`.`user_id`, 
+`vzb_sessions`.`ip_address`, 
+`vzb_sessions`.`user_agent`, 
+`vzb_sessions`.`payload`, 
+`vzb_sessions`.`last_activity`
+FROM `vzb_sessions` AS `vzb_sessions`</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="vzb_mediables_ibfk_1" Association="Self.vzb_mediables_ibfk_1">
+            <End Role="vzb_media" EntitySet="vzb_media" />
+            <End Role="vzb_mediables" EntitySet="vzb_mediables" />
+          </AssociationSet>
+          <AssociationSet Name="vzb_role_permissions_ibfk_1" Association="Self.vzb_role_permissions_ibfk_1">
+            <End Role="vzb_permissions" EntitySet="vzb_permissions" />
+            <End Role="vzb_role_permissions" EntitySet="vzb_role_permissions" />
+          </AssociationSet>
+          <AssociationSet Name="vzb_role_permissions_ibfk_2" Association="Self.vzb_role_permissions_ibfk_2">
+            <End Role="vzb_roles" EntitySet="vzb_roles" />
+            <End Role="vzb_role_permissions" EntitySet="vzb_role_permissions" />
+          </AssociationSet>
+          <AssociationSet Name="vzb_user_permissions_ibfk_1" Association="Self.vzb_user_permissions_ibfk_1">
+            <End Role="vzb_permissions" EntitySet="vzb_permissions" />
+            <End Role="vzb_user_permissions" EntitySet="vzb_user_permissions" />
+          </AssociationSet>
+          <AssociationSet Name="vzb_user_roles_ibfk_1" Association="Self.vzb_user_roles_ibfk_1">
+            <End Role="vzb_roles" EntitySet="vzb_roles" />
+            <End Role="vzb_user_roles" EntitySet="vzb_user_roles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MuhasebeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="vzb_accounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="number" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="currency_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="opening_balance" Type="Double" Nullable="false" />
+          <Property Name="bank_name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="bank_phone" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="bank_address" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="enabled" Type="Boolean" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_bill_histories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="bill_id" Type="Int32" Nullable="false" />
+          <Property Name="status_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="notify" Type="Boolean" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_bill_item_taxes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="bill_id" Type="Int32" Nullable="false" />
+          <Property Name="bill_item_id" Type="Int32" Nullable="false" />
+          <Property Name="tax_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="amount" Type="Double" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_bill_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="bill_id" Type="Int32" Nullable="false" />
+          <Property Name="item_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sku" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Double" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="total" Type="Double" Nullable="false" />
+          <Property Name="tax" Type="Double" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_bill_payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="bill_id" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="Int32" Nullable="false" />
+          <Property Name="paid_at" Type="DateTime" Nullable="false" />
+          <Property Name="amount" Type="Double" Nullable="false" />
+          <Property Name="currency_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="currency_rate" Type="Double" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="payment_method" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reference" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+          <Property Name="reconciled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_bill_statuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_bill_totals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="bill_id" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="amount" Type="Double" Nullable="false" />
+          <Property Name="sort_order" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_bills">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="bill_number" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="order_number" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="bill_status_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="billed_at" Type="DateTime" Nullable="false" />
+          <Property Name="due_at" Type="DateTime" Nullable="false" />
+          <Property Name="amount" Type="Double" Nullable="false" />
+          <Property Name="currency_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="currency_rate" Type="Double" Nullable="false" />
+          <Property Name="vendor_id" Type="Int32" Nullable="false" />
+          <Property Name="vendor_name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vendor_email" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="vendor_tax_number" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="vendor_phone" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="vendor_address" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="notes" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="parent_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="color" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="enabled" Type="Boolean" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_companies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="domain" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="enabled" Type="Boolean" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_currencies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rate" Type="Double" Nullable="false" />
+          <Property Name="enabled" Type="Boolean" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+          <Property Name="precision" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="symbol" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="symbol_first" Type="Int32" Nullable="false" />
+          <Property Name="decimal_mark" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="thousands_separator" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vzb_customers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="tax_number" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="website" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="currency_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="enabled" Type="Boolean" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+          <Property Name="reference" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vzb_failed_jobs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="connection" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="queue" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="payload" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="exception" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="failed_at" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_invoice_histories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="invoice_id" Type="Int32" Nullable="false" />
+          <Property Name="status_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="notify" Type="Boolean" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_invoice_item_taxes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="invoice_id" Type="Int32" Nullable="false" />
+          <Property Name="invoice_item_id" Type="Int32" Nullable="false" />
+          <Property Name="tax_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="amount" Type="Double" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_invoice_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="invoice_id" Type="Int32" Nullable="false" />
+          <Property Name="item_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sku" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Double" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="total" Type="Double" Nullable="false" />
+          <Property Name="tax" Type="Double" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_invoice_payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="invoice_id" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="Int32" Nullable="false" />
+          <Property Name="paid_at" Type="DateTime" Nullable="false" />
+          <Property Name="amount" Type="Double" Nullable="false" />
+          <Property Name="currency_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="currency_rate" Type="Double" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="payment_method" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reference" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+          <Property Name="reconciled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_invoice_statuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_invoice_totals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="invoice_id" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="amount" Type="Double" Nullable="false" />
+          <Property Name="sort_order" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_invoices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="invoice_number" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="order_number" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="invoice_status_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="invoiced_at" Type="DateTime" Nullable="false" />
+          <Property Name="due_at" Type="DateTime" Nullable="false" />
+          <Property Name="amount" Type="Double" Nullable="false" />
+          <Property Name="currency_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="currency_rate" Type="Double" Nullable="false" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="customer_name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="customer_email" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="customer_tax_number" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="customer_phone" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="customer_address" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="notes" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="parent_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sku" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="sale_price" Type="Double" Nullable="false" />
+          <Property Name="purchase_price" Type="Double" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="category_id" Type="Int32" />
+          <Property Name="tax_id" Type="Int32" />
+          <Property Name="enabled" Type="Boolean" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_jobs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="queue" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="payload" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="attempts" Type="Byte" Nullable="false" />
+          <Property Name="reserved_at" Type="Int64" />
+          <Property Name="available_at" Type="Int64" Nullable="false" />
+          <Property Name="created_at" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_media">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="disk" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="directory" Type="String" MaxLength="68" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="filename" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="extension" Type="String" MaxLength="28" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mime_type" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aggregate_type" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="size" Type="Int64" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+          <NavigationProperty Name="vzb_mediables" Relationship="Self.vzb_mediables_ibfk_1" FromRole="vzb_media" ToRole="vzb_mediables" />
+        </EntityType>
+        <EntityType Name="vzb_mediables">
+          <Key>
+            <PropertyRef Name="media_id" />
+            <PropertyRef Name="mediable_type" />
+            <PropertyRef Name="mediable_id" />
+            <PropertyRef Name="tag" />
+          </Key>
+          <Property Name="media_id" Type="Int64" Nullable="false" />
+          <Property Name="mediable_type" Type="String" MaxLength="152" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mediable_id" Type="Int64" Nullable="false" />
+          <Property Name="tag" Type="String" MaxLength="68" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="order" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="vzb_media" Relationship="Self.vzb_mediables_ibfk_1" FromRole="vzb_mediables" ToRole="vzb_media" />
+        </EntityType>
+        <EntityType Name="vzb_migrations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="migration" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="batch" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_module_histories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="module_id" Type="Int32" Nullable="false" />
+          <Property Name="category" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="version" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_modules">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="alias" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_notifications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="notifiable_id" Type="Int64" Nullable="false" />
+          <Property Name="notifiable_type" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="data" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="read_at" Type="DateTime" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="Int32" Nullable="false" />
+          <Property Name="paid_at" Type="DateTime" Nullable="false" />
+          <Property Name="amount" Type="Double" Nullable="false" />
+          <Property Name="currency_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="currency_rate" Type="Double" Nullable="false" />
+          <Property Name="vendor_id" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="payment_method" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reference" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+          <Property Name="parent_id" Type="Int32" Nullable="false" />
+          <Property Name="reconciled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_permissions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="display_name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <NavigationProperty Name="vzb_user_permissions" Relationship="Self.vzb_user_permissions_ibfk_1" FromRole="vzb_permissions" ToRole="vzb_user_permissions" />
+          <NavigationProperty Name="vzb_roles" Relationship="Self.vzb_role_permissions" FromRole="vzb_permissions" ToRole="vzb_roles" />
+        </EntityType>
+        <EntityType Name="vzb_reconciliations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="Int32" Nullable="false" />
+          <Property Name="started_at" Type="DateTime" Nullable="false" />
+          <Property Name="ended_at" Type="DateTime" Nullable="false" />
+          <Property Name="closing_balance" Type="Double" Nullable="false" />
+          <Property Name="reconciled" Type="Boolean" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_recurring">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="recurable_id" Type="Int64" Nullable="false" />
+          <Property Name="recurable_type" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="frequency" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="interval" Type="Int32" Nullable="false" />
+          <Property Name="started_at" Type="DateTime" Nullable="false" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_revenues">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="Int32" Nullable="false" />
+          <Property Name="paid_at" Type="DateTime" Nullable="false" />
+          <Property Name="amount" Type="Double" Nullable="false" />
+          <Property Name="currency_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="currency_rate" Type="Double" Nullable="false" />
+          <Property Name="customer_id" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="payment_method" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reference" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+          <Property Name="parent_id" Type="Int32" Nullable="false" />
+          <Property Name="reconciled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="display_name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <NavigationProperty Name="vzb_user_roles" Relationship="Self.vzb_user_roles_ibfk_1" FromRole="vzb_roles" ToRole="vzb_user_roles" />
+          <NavigationProperty Name="vzb_permissions" Relationship="Self.vzb_role_permissions" FromRole="vzb_roles" ToRole="vzb_permissions" />
+        </EntityType>
+        <EntityType Name="vzb_settings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="key" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vzb_taxes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rate" Type="Double" Nullable="false" />
+          <Property Name="enabled" Type="Boolean" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+          <Property Name="type" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_transfers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="payment_id" Type="Int32" Nullable="false" />
+          <Property Name="revenue_id" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_user_companies">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="company_id" />
+            <PropertyRef Name="user_type" />
+          </Key>
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="company_id" Type="Int64" Nullable="false" />
+          <Property Name="user_type" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_user_permissions">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="permission_id" />
+            <PropertyRef Name="user_type" />
+          </Key>
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="permission_id" Type="Int64" Nullable="false" />
+          <Property Name="user_type" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="vzb_permissions" Relationship="Self.vzb_user_permissions_ibfk_1" FromRole="vzb_user_permissions" ToRole="vzb_permissions" />
+        </EntityType>
+        <EntityType Name="vzb_user_roles">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="role_id" />
+            <PropertyRef Name="user_type" />
+          </Key>
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="role_id" Type="Int64" Nullable="false" />
+          <Property Name="user_type" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="vzb_roles" Relationship="Self.vzb_user_roles_ibfk_1" FromRole="vzb_user_roles" ToRole="vzb_roles" />
+        </EntityType>
+        <EntityType Name="vzb_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="remember_token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="last_logged_in_at" Type="DateTime" />
+          <Property Name="enabled" Type="Boolean" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+          <Property Name="locale" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vzb_vendors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="tax_number" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="website" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="currency_code" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="enabled" Type="Boolean" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+          <Property Name="updated_at" Type="DateTime" />
+          <Property Name="deleted_at" Type="DateTime" />
+          <Property Name="reference" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vzb_password_resets">
+          <Key>
+            <PropertyRef Name="email" />
+            <PropertyRef Name="token" />
+          </Key>
+          <Property Name="email" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="token" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="vzb_sessions">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="payload" />
+            <PropertyRef Name="last_activity" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_id" Type="Int64" />
+          <Property Name="ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="user_agent" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="payload" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_activity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="vzb_mediables_ibfk_1">
+          <End Role="vzb_media" Type="Self.vzb_media" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vzb_mediables" Type="Self.vzb_mediables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vzb_media">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vzb_mediables">
+              <PropertyRef Name="media_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vzb_user_permissions_ibfk_1">
+          <End Role="vzb_permissions" Type="Self.vzb_permissions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vzb_user_permissions" Type="Self.vzb_user_permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vzb_permissions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vzb_user_permissions">
+              <PropertyRef Name="permission_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vzb_user_roles_ibfk_1">
+          <End Role="vzb_roles" Type="Self.vzb_roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vzb_user_roles" Type="Self.vzb_user_roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vzb_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vzb_user_roles">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vzb_role_permissions">
+          <End Role="vzb_permissions" Type="Self.vzb_permissions" Multiplicity="*" />
+          <End Role="vzb_roles" Type="Self.vzb_roles" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MuhasebeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="vzb_accounts" EntityType="Self.vzb_accounts" />
+          <EntitySet Name="vzb_bill_histories" EntityType="Self.vzb_bill_histories" />
+          <EntitySet Name="vzb_bill_item_taxes" EntityType="Self.vzb_bill_item_taxes" />
+          <EntitySet Name="vzb_bill_items" EntityType="Self.vzb_bill_items" />
+          <EntitySet Name="vzb_bill_payments" EntityType="Self.vzb_bill_payments" />
+          <EntitySet Name="vzb_bill_statuses" EntityType="Self.vzb_bill_statuses" />
+          <EntitySet Name="vzb_bill_totals" EntityType="Self.vzb_bill_totals" />
+          <EntitySet Name="vzb_bills" EntityType="Self.vzb_bills" />
+          <EntitySet Name="vzb_categories" EntityType="Self.vzb_categories" />
+          <EntitySet Name="vzb_companies" EntityType="Self.vzb_companies" />
+          <EntitySet Name="vzb_currencies" EntityType="Self.vzb_currencies" />
+          <EntitySet Name="vzb_customers" EntityType="Self.vzb_customers" />
+          <EntitySet Name="vzb_failed_jobs" EntityType="Self.vzb_failed_jobs" />
+          <EntitySet Name="vzb_invoice_histories" EntityType="Self.vzb_invoice_histories" />
+          <EntitySet Name="vzb_invoice_item_taxes" EntityType="Self.vzb_invoice_item_taxes" />
+          <EntitySet Name="vzb_invoice_items" EntityType="Self.vzb_invoice_items" />
+          <EntitySet Name="vzb_invoice_payments" EntityType="Self.vzb_invoice_payments" />
+          <EntitySet Name="vzb_invoice_statuses" EntityType="Self.vzb_invoice_statuses" />
+          <EntitySet Name="vzb_invoice_totals" EntityType="Self.vzb_invoice_totals" />
+          <EntitySet Name="vzb_invoices" EntityType="Self.vzb_invoices" />
+          <EntitySet Name="vzb_items" EntityType="Self.vzb_items" />
+          <EntitySet Name="vzb_jobs" EntityType="Self.vzb_jobs" />
+          <EntitySet Name="vzb_media" EntityType="Self.vzb_media" />
+          <EntitySet Name="vzb_mediables" EntityType="Self.vzb_mediables" />
+          <EntitySet Name="vzb_migrations" EntityType="Self.vzb_migrations" />
+          <EntitySet Name="vzb_module_histories" EntityType="Self.vzb_module_histories" />
+          <EntitySet Name="vzb_modules" EntityType="Self.vzb_modules" />
+          <EntitySet Name="vzb_notifications" EntityType="Self.vzb_notifications" />
+          <EntitySet Name="vzb_payments" EntityType="Self.vzb_payments" />
+          <EntitySet Name="vzb_permissions" EntityType="Self.vzb_permissions" />
+          <EntitySet Name="vzb_reconciliations" EntityType="Self.vzb_reconciliations" />
+          <EntitySet Name="vzb_recurring" EntityType="Self.vzb_recurring" />
+          <EntitySet Name="vzb_revenues" EntityType="Self.vzb_revenues" />
+          <EntitySet Name="vzb_roles" EntityType="Self.vzb_roles" />
+          <EntitySet Name="vzb_settings" EntityType="Self.vzb_settings" />
+          <EntitySet Name="vzb_taxes" EntityType="Self.vzb_taxes" />
+          <EntitySet Name="vzb_transfers" EntityType="Self.vzb_transfers" />
+          <EntitySet Name="vzb_user_companies" EntityType="Self.vzb_user_companies" />
+          <EntitySet Name="vzb_user_permissions" EntityType="Self.vzb_user_permissions" />
+          <EntitySet Name="vzb_user_roles" EntityType="Self.vzb_user_roles" />
+          <EntitySet Name="vzb_users" EntityType="Self.vzb_users" />
+          <EntitySet Name="vzb_vendors" EntityType="Self.vzb_vendors" />
+          <EntitySet Name="vzb_password_resets" EntityType="Self.vzb_password_resets" />
+          <EntitySet Name="vzb_sessions" EntityType="Self.vzb_sessions" />
+          <AssociationSet Name="vzb_mediables_ibfk_1" Association="Self.vzb_mediables_ibfk_1">
+            <End Role="vzb_media" EntitySet="vzb_media" />
+            <End Role="vzb_mediables" EntitySet="vzb_mediables" />
+          </AssociationSet>
+          <AssociationSet Name="vzb_user_permissions_ibfk_1" Association="Self.vzb_user_permissions_ibfk_1">
+            <End Role="vzb_permissions" EntitySet="vzb_permissions" />
+            <End Role="vzb_user_permissions" EntitySet="vzb_user_permissions" />
+          </AssociationSet>
+          <AssociationSet Name="vzb_user_roles_ibfk_1" Association="Self.vzb_user_roles_ibfk_1">
+            <End Role="vzb_roles" EntitySet="vzb_roles" />
+            <End Role="vzb_user_roles" EntitySet="vzb_user_roles" />
+          </AssociationSet>
+          <AssociationSet Name="vzb_role_permissions" Association="Self.vzb_role_permissions">
+            <End Role="vzb_permissions" EntitySet="vzb_permissions" />
+            <End Role="vzb_roles" EntitySet="vzb_roles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MuhasebeModelStoreContainer" CdmEntityContainer="MuhasebeEntities">
+          <EntitySetMapping Name="vzb_accounts">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_accounts">
+              <MappingFragment StoreEntitySet="vzb_accounts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="currency_code" ColumnName="currency_code" />
+                <ScalarProperty Name="opening_balance" ColumnName="opening_balance" />
+                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+                <ScalarProperty Name="bank_phone" ColumnName="bank_phone" />
+                <ScalarProperty Name="bank_address" ColumnName="bank_address" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_bill_histories">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_bill_histories">
+              <MappingFragment StoreEntitySet="vzb_bill_histories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+                <ScalarProperty Name="status_code" ColumnName="status_code" />
+                <ScalarProperty Name="notify" ColumnName="notify" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_bill_item_taxes">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_bill_item_taxes">
+              <MappingFragment StoreEntitySet="vzb_bill_item_taxes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+                <ScalarProperty Name="bill_item_id" ColumnName="bill_item_id" />
+                <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_bill_items">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_bill_items">
+              <MappingFragment StoreEntitySet="vzb_bill_items">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="sku" ColumnName="sku" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="tax" ColumnName="tax" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_bill_payments">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_bill_payments">
+              <MappingFragment StoreEntitySet="vzb_bill_payments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="paid_at" ColumnName="paid_at" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="currency_code" ColumnName="currency_code" />
+                <ScalarProperty Name="currency_rate" ColumnName="currency_rate" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+                <ScalarProperty Name="reconciled" ColumnName="reconciled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_bill_statuses">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_bill_statuses">
+              <MappingFragment StoreEntitySet="vzb_bill_statuses">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_bill_totals">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_bill_totals">
+              <MappingFragment StoreEntitySet="vzb_bill_totals">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="sort_order" ColumnName="sort_order" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_bills">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_bills">
+              <MappingFragment StoreEntitySet="vzb_bills">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="bill_number" ColumnName="bill_number" />
+                <ScalarProperty Name="order_number" ColumnName="order_number" />
+                <ScalarProperty Name="bill_status_code" ColumnName="bill_status_code" />
+                <ScalarProperty Name="billed_at" ColumnName="billed_at" />
+                <ScalarProperty Name="due_at" ColumnName="due_at" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="currency_code" ColumnName="currency_code" />
+                <ScalarProperty Name="currency_rate" ColumnName="currency_rate" />
+                <ScalarProperty Name="vendor_id" ColumnName="vendor_id" />
+                <ScalarProperty Name="vendor_name" ColumnName="vendor_name" />
+                <ScalarProperty Name="vendor_email" ColumnName="vendor_email" />
+                <ScalarProperty Name="vendor_tax_number" ColumnName="vendor_tax_number" />
+                <ScalarProperty Name="vendor_phone" ColumnName="vendor_phone" />
+                <ScalarProperty Name="vendor_address" ColumnName="vendor_address" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_categories">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_categories">
+              <MappingFragment StoreEntitySet="vzb_categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_companies">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_companies">
+              <MappingFragment StoreEntitySet="vzb_companies">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="domain" ColumnName="domain" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_currencies">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_currencies">
+              <MappingFragment StoreEntitySet="vzb_currencies">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+                <ScalarProperty Name="precision" ColumnName="precision" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+                <ScalarProperty Name="symbol_first" ColumnName="symbol_first" />
+                <ScalarProperty Name="decimal_mark" ColumnName="decimal_mark" />
+                <ScalarProperty Name="thousands_separator" ColumnName="thousands_separator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_customers">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_customers">
+              <MappingFragment StoreEntitySet="vzb_customers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="tax_number" ColumnName="tax_number" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="currency_code" ColumnName="currency_code" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_failed_jobs">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_failed_jobs">
+              <MappingFragment StoreEntitySet="vzb_failed_jobs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="connection" ColumnName="connection" />
+                <ScalarProperty Name="queue" ColumnName="queue" />
+                <ScalarProperty Name="payload" ColumnName="payload" />
+                <ScalarProperty Name="exception" ColumnName="exception" />
+                <ScalarProperty Name="failed_at" ColumnName="failed_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_invoice_histories">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_invoice_histories">
+              <MappingFragment StoreEntitySet="vzb_invoice_histories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+                <ScalarProperty Name="status_code" ColumnName="status_code" />
+                <ScalarProperty Name="notify" ColumnName="notify" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_invoice_item_taxes">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_invoice_item_taxes">
+              <MappingFragment StoreEntitySet="vzb_invoice_item_taxes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+                <ScalarProperty Name="invoice_item_id" ColumnName="invoice_item_id" />
+                <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_invoice_items">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_invoice_items">
+              <MappingFragment StoreEntitySet="vzb_invoice_items">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="sku" ColumnName="sku" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="tax" ColumnName="tax" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_invoice_payments">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_invoice_payments">
+              <MappingFragment StoreEntitySet="vzb_invoice_payments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="paid_at" ColumnName="paid_at" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="currency_code" ColumnName="currency_code" />
+                <ScalarProperty Name="currency_rate" ColumnName="currency_rate" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+                <ScalarProperty Name="reconciled" ColumnName="reconciled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_invoice_statuses">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_invoice_statuses">
+              <MappingFragment StoreEntitySet="vzb_invoice_statuses">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_invoice_totals">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_invoice_totals">
+              <MappingFragment StoreEntitySet="vzb_invoice_totals">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="sort_order" ColumnName="sort_order" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_invoices">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_invoices">
+              <MappingFragment StoreEntitySet="vzb_invoices">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="invoice_number" ColumnName="invoice_number" />
+                <ScalarProperty Name="order_number" ColumnName="order_number" />
+                <ScalarProperty Name="invoice_status_code" ColumnName="invoice_status_code" />
+                <ScalarProperty Name="invoiced_at" ColumnName="invoiced_at" />
+                <ScalarProperty Name="due_at" ColumnName="due_at" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="currency_code" ColumnName="currency_code" />
+                <ScalarProperty Name="currency_rate" ColumnName="currency_rate" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="customer_email" ColumnName="customer_email" />
+                <ScalarProperty Name="customer_tax_number" ColumnName="customer_tax_number" />
+                <ScalarProperty Name="customer_phone" ColumnName="customer_phone" />
+                <ScalarProperty Name="customer_address" ColumnName="customer_address" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_items">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_items">
+              <MappingFragment StoreEntitySet="vzb_items">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="sku" ColumnName="sku" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="sale_price" ColumnName="sale_price" />
+                <ScalarProperty Name="purchase_price" ColumnName="purchase_price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_jobs">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_jobs">
+              <MappingFragment StoreEntitySet="vzb_jobs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="queue" ColumnName="queue" />
+                <ScalarProperty Name="payload" ColumnName="payload" />
+                <ScalarProperty Name="attempts" ColumnName="attempts" />
+                <ScalarProperty Name="reserved_at" ColumnName="reserved_at" />
+                <ScalarProperty Name="available_at" ColumnName="available_at" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_media">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_media">
+              <MappingFragment StoreEntitySet="vzb_media">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="disk" ColumnName="disk" />
+                <ScalarProperty Name="directory" ColumnName="directory" />
+                <ScalarProperty Name="filename" ColumnName="filename" />
+                <ScalarProperty Name="extension" ColumnName="extension" />
+                <ScalarProperty Name="mime_type" ColumnName="mime_type" />
+                <ScalarProperty Name="aggregate_type" ColumnName="aggregate_type" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_mediables">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_mediables">
+              <MappingFragment StoreEntitySet="vzb_mediables">
+                <ScalarProperty Name="media_id" ColumnName="media_id" />
+                <ScalarProperty Name="mediable_type" ColumnName="mediable_type" />
+                <ScalarProperty Name="mediable_id" ColumnName="mediable_id" />
+                <ScalarProperty Name="tag" ColumnName="tag" />
+                <ScalarProperty Name="order" ColumnName="order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_migrations">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_migrations">
+              <MappingFragment StoreEntitySet="vzb_migrations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="migration" ColumnName="migration" />
+                <ScalarProperty Name="batch" ColumnName="batch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_module_histories">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_module_histories">
+              <MappingFragment StoreEntitySet="vzb_module_histories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="module_id" ColumnName="module_id" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_modules">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_modules">
+              <MappingFragment StoreEntitySet="vzb_modules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_notifications">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_notifications">
+              <MappingFragment StoreEntitySet="vzb_notifications">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="notifiable_id" ColumnName="notifiable_id" />
+                <ScalarProperty Name="notifiable_type" ColumnName="notifiable_type" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="read_at" ColumnName="read_at" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_payments">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_payments">
+              <MappingFragment StoreEntitySet="vzb_payments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="paid_at" ColumnName="paid_at" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="currency_code" ColumnName="currency_code" />
+                <ScalarProperty Name="currency_rate" ColumnName="currency_rate" />
+                <ScalarProperty Name="vendor_id" ColumnName="vendor_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+                <ScalarProperty Name="reconciled" ColumnName="reconciled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_permissions">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_permissions">
+              <MappingFragment StoreEntitySet="vzb_permissions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="display_name" ColumnName="display_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_reconciliations">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_reconciliations">
+              <MappingFragment StoreEntitySet="vzb_reconciliations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="started_at" ColumnName="started_at" />
+                <ScalarProperty Name="ended_at" ColumnName="ended_at" />
+                <ScalarProperty Name="closing_balance" ColumnName="closing_balance" />
+                <ScalarProperty Name="reconciled" ColumnName="reconciled" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_recurring">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_recurring">
+              <MappingFragment StoreEntitySet="vzb_recurring">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="recurable_id" ColumnName="recurable_id" />
+                <ScalarProperty Name="recurable_type" ColumnName="recurable_type" />
+                <ScalarProperty Name="frequency" ColumnName="frequency" />
+                <ScalarProperty Name="interval" ColumnName="interval" />
+                <ScalarProperty Name="started_at" ColumnName="started_at" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_revenues">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_revenues">
+              <MappingFragment StoreEntitySet="vzb_revenues">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="paid_at" ColumnName="paid_at" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="currency_code" ColumnName="currency_code" />
+                <ScalarProperty Name="currency_rate" ColumnName="currency_rate" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+                <ScalarProperty Name="reconciled" ColumnName="reconciled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_roles">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_roles">
+              <MappingFragment StoreEntitySet="vzb_roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="display_name" ColumnName="display_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_settings">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_settings">
+              <MappingFragment StoreEntitySet="vzb_settings">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_taxes">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_taxes">
+              <MappingFragment StoreEntitySet="vzb_taxes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_transfers">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_transfers">
+              <MappingFragment StoreEntitySet="vzb_transfers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+                <ScalarProperty Name="revenue_id" ColumnName="revenue_id" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_user_companies">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_user_companies">
+              <MappingFragment StoreEntitySet="vzb_user_companies">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="user_type" ColumnName="user_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_user_permissions">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_user_permissions">
+              <MappingFragment StoreEntitySet="vzb_user_permissions">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="permission_id" ColumnName="permission_id" />
+                <ScalarProperty Name="user_type" ColumnName="user_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_user_roles">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_user_roles">
+              <MappingFragment StoreEntitySet="vzb_user_roles">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="user_type" ColumnName="user_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_users">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_users">
+              <MappingFragment StoreEntitySet="vzb_users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="remember_token" ColumnName="remember_token" />
+                <ScalarProperty Name="last_logged_in_at" ColumnName="last_logged_in_at" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+                <ScalarProperty Name="locale" ColumnName="locale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_vendors">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_vendors">
+              <MappingFragment StoreEntitySet="vzb_vendors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="tax_number" ColumnName="tax_number" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="currency_code" ColumnName="currency_code" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_password_resets">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_password_resets">
+              <MappingFragment StoreEntitySet="vzb_password_resets">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vzb_sessions">
+            <EntityTypeMapping TypeName="MuhasebeModel.vzb_sessions">
+              <MappingFragment StoreEntitySet="vzb_sessions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+                <ScalarProperty Name="user_agent" ColumnName="user_agent" />
+                <ScalarProperty Name="payload" ColumnName="payload" />
+                <ScalarProperty Name="last_activity" ColumnName="last_activity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="vzb_role_permissions" TypeName="MuhasebeModel.vzb_role_permissions" StoreEntitySet="vzb_role_permissions">
+            <EndProperty Name="vzb_permissions">
+              <ScalarProperty Name="id" ColumnName="permission_id" />
+            </EndProperty>
+            <EndProperty Name="vzb_roles">
+              <ScalarProperty Name="id" ColumnName="role_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
